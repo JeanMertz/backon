@@ -95,7 +95,7 @@ impl ExponentialBuilder {
     /// Note: Having a factor less than `1.0` does not make any sense as it would create a
     /// smaller negative backoff.
     pub const fn with_factor(mut self, factor: f32) -> Self {
-        self.factor = factor;
+        self.factor = factor.max(1.0);
         self
     }
 
