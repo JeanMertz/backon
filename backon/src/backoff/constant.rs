@@ -62,10 +62,20 @@ impl ConstantBuilder {
         self
     }
 
+    /// The delay for the backoff.
+    pub const fn delay(&self) -> Duration {
+        self.delay
+    }
+
     /// Set the maximum number of attempts to be made.
     pub const fn with_max_times(mut self, max_times: usize) -> Self {
         self.max_times = Some(max_times);
         self
+    }
+
+    /// The maximum number of attempts to be made.
+    pub const fn max_times(&self) -> Option<usize> {
+        self.max_times
     }
 
     /// Enable jitter for the backoff.
@@ -76,10 +86,20 @@ impl ConstantBuilder {
         self
     }
 
+    /// The jitter for the backoff.
+    pub const fn jitter(&self) -> bool {
+        self.jitter
+    }
+
     /// Set the seed value for the jitter random number generator. If no seed is given, a random seed is used in std and default seed is used in no_std.
     pub fn with_jitter_seed(mut self, seed: u64) -> Self {
         self.seed = Some(seed);
         self
+    }
+
+    /// The seed value for the jitter random number generator.
+    pub const fn jitter_seed(&self) -> Option<u64> {
+        self.seed
     }
 
     /// Set no max times for the backoff.

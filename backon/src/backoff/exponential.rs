@@ -74,10 +74,20 @@ impl ExponentialBuilder {
         self
     }
 
+    /// The jitter for the backoff.
+    pub const fn jitter(&self) -> bool {
+        self.jitter
+    }
+
     /// Set the seed value for the jitter random number generator. If no seed is given, a random seed is used in std and default seed is used in no_std.
     pub fn with_jitter_seed(mut self, seed: u64) -> Self {
         self.seed = Some(seed);
         self
+    }
+
+    /// The seed value for the jitter random number generator.
+    pub const fn jitter_seed(&self) -> Option<u64> {
+        self.seed
     }
 
     /// Set the factor for the backoff.
@@ -89,10 +99,20 @@ impl ExponentialBuilder {
         self
     }
 
+    /// The factor for the backoff.
+    pub const fn factor(&self) -> f32 {
+        self.factor
+    }
+
     /// Set the minimum delay for the backoff.
     pub const fn with_min_delay(mut self, min_delay: Duration) -> Self {
         self.min_delay = min_delay;
         self
+    }
+
+    /// The minimum delay for the backoff.
+    pub const fn min_delay(&self) -> Duration {
+        self.min_delay
     }
 
     /// Set the maximum delay for the backoff.
@@ -113,6 +133,11 @@ impl ExponentialBuilder {
         self
     }
 
+    /// The maximum delay for the backoff.
+    pub const fn max_delay(&self) -> Option<Duration> {
+        self.max_delay
+    }
+
     /// Set the maximum number of attempts for the current backoff.
     ///
     /// The backoff will stop if the maximum number of attempts is reached.
@@ -131,6 +156,11 @@ impl ExponentialBuilder {
         self
     }
 
+    /// The maximum number of attempts for the current backoff.
+    pub const fn max_times(&self) -> Option<usize> {
+        self.max_times
+    }
+
     /// Set the total delay for the backoff.
     ///
     /// The backoff will stop yielding sleep durations once the cumulative sleep time
@@ -138,6 +168,11 @@ impl ExponentialBuilder {
     pub const fn with_total_delay(mut self, total_delay: Option<Duration>) -> Self {
         self.total_delay = total_delay;
         self
+    }
+
+    /// The total delay for the backoff.
+    pub const fn total_delay(&self) -> Option<Duration> {
+        self.total_delay
     }
 }
 

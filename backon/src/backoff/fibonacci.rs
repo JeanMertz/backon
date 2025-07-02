@@ -68,16 +68,31 @@ impl FibonacciBuilder {
         self
     }
 
+    /// The jitter for the backoff.
+    pub const fn jitter(&self) -> bool {
+        self.jitter
+    }
+
     /// Set the seed value for the jitter random number generator. If no seed is given, a random seed is used in std and default seed is used in no_std.
     pub fn with_jitter_seed(mut self, seed: u64) -> Self {
         self.seed = Some(seed);
         self
     }
 
+    /// The seed value for the jitter random number generator.
+    pub const fn jitter_seed(&self) -> Option<u64> {
+        self.seed
+    }
+
     /// Set the minimum delay for the backoff.
     pub const fn with_min_delay(mut self, min_delay: Duration) -> Self {
         self.min_delay = min_delay;
         self
+    }
+
+    /// The minimum delay for the backoff.
+    pub const fn min_delay(&self) -> Duration {
+        self.min_delay
     }
 
     /// Set the maximum delay for the current backoff.
@@ -98,6 +113,11 @@ impl FibonacciBuilder {
         self
     }
 
+    /// The maximum delay for the backoff.
+    pub const fn max_delay(&self) -> Option<Duration> {
+        self.max_delay
+    }
+
     /// Set the maximum number of attempts for the current backoff.
     ///
     /// The backoff will stop if the maximum number of attempts is reached.
@@ -114,6 +134,11 @@ impl FibonacciBuilder {
     pub const fn without_max_times(mut self) -> Self {
         self.max_times = None;
         self
+    }
+
+    /// The maximum number of attempts for the current backoff.
+    pub const fn max_times(&self) -> Option<usize> {
+        self.max_times
     }
 }
 
